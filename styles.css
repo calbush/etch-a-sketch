@@ -1,0 +1,25 @@
+body {
+    display:flex;
+    justify-content: center;
+}
+
+#container {
+    display:flex;
+    flex-wrap: wrap;
+    height: 256px;
+    width: 256px;
+}
+
+.grid {
+    width: 14px;
+    height: 14px;
+}
+
+* {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.black {
+    background-color: black;
+}
