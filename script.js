@@ -5,43 +5,69 @@ btn.setAttribute('id','btn')
 document.body.prepend(btn)
 console.log(btn)
 btn.textContent = "Click Me!"
-btn.addEventListener('click', setGridSize)
+btn.addEventListener('click', e => {
+    writeGrid(determineGridSize())
+    sketch()
+})
 
+for (let i = 0; i < 256; i++) {
+    let div = document.createElement('div')
+    container.appendChild(div)
+    div.classList.add('grid')
+}
 
-function setGridSize () {
-    const squareSize = parseInt(prompt('How many squares per side?'));
+let gridSquares = document.querySelectorAll('.grid')
 
-    if (squareSize > 100){
-        alert('Please choose a number smaller than 100')
+function removeGridDivs(){
+    gridSquares = document.querySelectorAll('.grid')
+    for (i = 0; i < gridSquares.length; i++){
+        container.removeChild(gridSquares[i])
     }
-    else if (squareSize <= 100) {
-    const pixelSize = 288 / squareSize;
-    const compensateForBorder = pixelSize - 2;
-    const totalSquares = squareSize ** 2;
-    console.log(totalSquares)
+}
 
-    for (let i = 0; i < totalSquares; i++) {
+function writeGrid(sizeResult) {
+    removeGridDivs()
+    let pixelSize = (288 / sizeResult) - 2;
+    for (let i = 0; i < (sizeResult ** 2); i++) {
         let div = document.createElement('div')
         container.appendChild(div)
         div.classList.add('grid')
     }
+    console.log(pixelSize)
+    gridSquares = document.querySelectorAll('.grid');
+    console.log(gridSquares)
 
-    const gridSquares = document.querySelectorAll('.grid')
-
-   
     for (i of gridSquares){
-        i.style.width = `${compensateForBorder}px`
-        i.style.height = `${compensateForBorder}px`
+        i.style.width = `${pixelSize}px`
+        i.style.height = `${pixelSize}px`
         }
+    }
 
+function determineGridSize() {
+    const userSidelength = parseInt(prompt('How many squares per side?'));
+
+    if (userSidelength > 100){
+        alert('Please choose a number smaller than 100')
+    }
+    else if (userSidelength <= 100) {
+    return userSidelength;
+    }
+}
+function sketch() {
+    gridSquares = document.querySelectorAll('.grid')
     for (square of gridSquares) {
         square.addEventListener('mouseover', (e) => {
             e.target.classList.add('black')
         }
         )
         }
-    }
 }
+for (square of gridSquares) {
+    square.addEventListener('mouseover', (e) => {
+        e.target.classList.add('black')
+    }
+    )
+    }
 
 
 
